@@ -1,0 +1,55 @@
+﻿@{
+	ViewData["Title"] = "Income This Month";
+	Layout = "~/Views/Shared/_SecondaryLayout.cshtml";
+}
+
+@if (ViewBag.ListOfExpenses.Count > 0)
+{
+	<div class="table-responsive">
+		<table class="table table-hover text-center mx-auto w-auto">
+			<thead class="table-light">
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Description</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Time added</th>
+					<th scope="col">Type</th>
+					<th scope="col">Edit</th>
+					<th scope="col">Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in ViewBag.ListOfExpenses)
+				{
+					<tr>
+						<th scope="row">@item.ID</th>
+						<td>@item.Name</td>
+						<td>@item.Description</td>
+						<td>@item.Amount</td>
+						<td>@item.TimeAdded</td>
+						<td>@item.Type</td>
+						<td>
+							<a href="@Url.Action("EditExpense", "MoneySystem", new { ID = item.ID })" class="btn btn-success">
+								<i class="fas fa-edit"></i>
+								<span>
+									<strong>Edit</strong>
+								</span>
+							</a>
+						</td>
+						<td>
+							<a href="@Url.Action("DeleteExpense", "MoneySystem", new { ID = item.ID })" class="btn btn-danger">
+								<i class="far fa-trash-alt"></i>
+								<span>
+									<strong>Delete</strong>
+								</span>
+							</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+

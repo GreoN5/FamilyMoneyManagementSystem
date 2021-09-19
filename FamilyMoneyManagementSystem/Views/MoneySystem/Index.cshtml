@@ -1,0 +1,52 @@
+﻿@using System.Globalization
+@model FamilyMoneyManagementSystem.Models.User
+
+@{
+	ViewData["Title"] = "Money System";
+	Layout = "~/Views/Shared/_SecondaryLayout.cshtml";
+}
+
+<h1 class="text-center m-5">
+	Available money for @($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month)} - {ViewBag.Money}")
+</h1>
+
+<div class="d-flex justify-content-center">
+	<a asp-controller="MoneySystem" asp-action="AddIncome" class="btn btn-primary m-3">Add Income</a>
+	<a asp-controller="MoneySystem" asp-action="AddExpense" class="btn btn-primary m-3">Add Expense</a>
+	<a asp-controller="MoneySystem" asp-action="AddRepeatedIncome" class="btn btn-primary m-3">Add Repeated Income</a>
+	<a asp-controller="MoneySystem" asp-action="AddRepeatedExpense" class="btn btn-primary m-3">Add Repeated Expense</a>
+	<a asp-controller="MoneySystem" asp-action="GetIncomeListForThisMonth" class="btn btn-primary m-3">Income list</a>
+	<a asp-controller="MoneySystem" asp-action="GetExpenseListForThisMonth" class="btn btn-primary m-3">Expense list</a>
+</div>
+
+<canvas id="myChart"></canvas>
+
+<script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'pie',
+		data: {
+			labels: ['Incomes', 'Expenses'],
+			datasets: [{
+				label: 'Money spent',
+				data: [@Html.Raw(ViewBag.Incomes), @Html.ViewBag.Expenses],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+				],
+				borderColor: [
+					'rgba(255, 99, 132, 1)',
+					'rgba(54, 162, 235, 1)',
+				],
+				borderWidth: 2
+			}]
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true
+				}
+			}
+		}
+	});
+</script>

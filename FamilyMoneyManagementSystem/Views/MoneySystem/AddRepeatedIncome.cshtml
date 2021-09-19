@@ -1,0 +1,89 @@
+﻿@model FamilyMoneyManagementSystem.ViewModels.MoneyVM.MoneyVM
+
+@{
+	ViewData["Title"] = "Add Repeated Income";
+	Layout = "~/Views/Shared/_SecondaryLayout.cshtml";
+}
+
+@if (ViewBag.ListOfIncome.Count > 0)
+{
+	<div class="container h-75 d-flex justify-content-center mb-4">
+		<div class="text-center">
+			<select id="money" class="form-select">
+				<option>Select Income</option>
+				@foreach (var item in ViewBag.ListOfIncome)
+				{
+					<option value="@item.ID">
+						@item.Name,
+						@(item.TimeAdded.Day > 0 && item.TimeAdded.Day <= 9 ? $"0{item.TimeAdded.Day}" : item.TimeAdded.Day)/@item.TimeAdded.Month,
+						@item.Amount
+					</option>
+				}
+			</select>
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+	</div>
+
+	<form asp-action="AddRepeatedIncome" method="post" class="row form-width">
+		<div class="col col-lg-4 m-lg-auto text-center">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="row mb-3">
+				<label asp-for="Name" class="col-sm-3 col-form-label">Name</label>
+				<div class="col-sm-7">
+					<input id="name" type="text" class="form-control" name="Name" readonly>
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="Description" class="col-sm-3 col-form-label">Description</label>
+				<div class="col-sm-7">
+					<input id="description" type="text" class="form-control" name="Description" readonly>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="Amount" class="col-sm-3 col-form-label">Amount</label>
+				<div class="col-sm-7">
+					<input id="amount" inputmode="numeric" class="form-control" name="Amount" readonly>
+					<span asp-validation-for="Amount" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<label asp-for="TimeAdded" class="col-sm-3 col-form-label">Time added</label>
+				<div class="col-sm-7">
+					<input id="time-added" inputmode="numeric" class="form-control" name="TimeAdded" readonly>
+					<span asp-validation-for="TimeAdded" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="col text-end">
+				<button class="btn btn-primary">Add</button>
+			</div>
+		</div>
+	</form>
+
+
+	<script>
+		$("#money").change(function () {
+			var id = $(this).val();
+
+			if (id === "Select Income") {
+				$("#name").val("");
+				$("#description").val("");
+				$("#amount").val("");
+				$("#time-added").val("");
+			} else {
+				$.getJSON("/MoneySystem/GetMoneyIncome?ID=" + id, function (data) {
+					$("#name").val(data.name);
+					$("#description").val(data.description);
+					$("#amount").val(data.amount);
+					$("#time-added").val(data.timeAdded);
+				});
+			}
+		});
+	</script>
+}
+else
+{
+	<h2 class="text-center">You have no incomes for previous month on this day to be added!</h2>
+}
+
+

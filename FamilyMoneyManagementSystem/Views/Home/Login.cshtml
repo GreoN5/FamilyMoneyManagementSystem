@@ -1,0 +1,29 @@
+﻿@model FamilyMoneyManagementSystem.ViewModels.UserLoginVM
+
+@{ 
+	ViewData["Title"] = "Login";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Login" method="post" class="row form-width">
+	<div class="col col-lg-4 m-lg-auto text-center">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="row mb-3">
+			<label asp-for="Username" class="col-sm-3 col-form-label">Username</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control" name="Username">
+				<span asp-validation-for="Username" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label asp-for="Password" class="col-sm-3 col-form-label">Password</label>
+			<div class="col-sm-7">
+				<input type="password" class="form-control" name="Password">
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col text-end">
+			<button class="btn btn-primary">Sign in</button>
+		</div>
+	</div>
+</form>

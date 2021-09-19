@@ -1,0 +1,50 @@
+﻿@model FamilyMoneyManagementSystem.ViewModels.UserRegistrationVM
+
+@{
+	ViewData["Title"] = "Registration";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Register" method="post" class="row form-width">
+    <div class="col col-lg-4 m-lg-auto text-center">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mb-3">
+            <label asp-for="Username" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>           
+        </div>
+        <div class="row mb-3">
+            <label asp-for="FirstName" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>    
+            </div>
+        <div class="row mb-3">
+            <label asp-for="LastName" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="LastName" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Age" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-7">
+                <input inputmode="numeric" class="form-control" name="Age" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label asp-for="Password" class="col-sm-3 col-form-label"></label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" name="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col text-end">
+            <button class="btn btn-primary">Sign up</button>
+        </div>
+    </div>
+</form>

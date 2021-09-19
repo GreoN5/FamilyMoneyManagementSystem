@@ -1,0 +1,43 @@
+﻿@model FamilyMoneyManagementSystem.ViewModels.MoneyVM.MoneyTaxEditVM
+
+@{
+    ViewData["Title"] = "EditIncome";
+    Layout = "~/Views/Shared/_SecondaryLayout.cshtml";
+}
+
+<form asp-controller="MoneySystem" asp-action="EditIncome" method="post" class="row form-width">
+	<input hidden asp-for="ID" />
+	<div class="col col-lg-4 m-lg-auto text-center">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="row mb-3">
+			<label asp-for="Name" class="col-sm-3 col-form-label">Name</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control" name="Name" value="@Model.Name">
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label asp-for="Description" class="col-sm-3 col-form-label">Description</label>
+			<div class="col-sm-7">
+				<input type="text" class="form-control" name="Description" value="@Model.Description">
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label asp-for="Amount" class="col-sm-3 col-form-label">Amount</label>
+			<div class="col-sm-7">
+				<input inputmode="numeric" class="form-control" name="Amount" value="@Model.Amount">
+				<span asp-validation-for="Amount" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="row mb-3">
+			<label asp-for="TimeAdded" class="col-sm-3 col-form-label"></label>
+			<div class="col-sm-7">
+				<input type="datetime" id="AddDate" class="form-control" name="TimeAdded" value="@Model.TimeAdded">
+				<span asp-validation-for="TimeAdded" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col text-end">
+			<button class="btn btn-primary">Update</button>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,18 @@
+﻿.nav-space {
+	margin-bottom: 2.5em;
+	margin-top: 1em;
+}
+
+.nav-text-bold {
+	font-size: 18px;
+	font-weight: 700 !important;
+}
+
+.form-width {
+	max-width: 100%;
+}
+
+canvas {
+	width: 60%;
+	height: 50px;
+}
