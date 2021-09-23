@@ -23,8 +23,13 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
         </div>
-        <div class="col text-end">
-            <button class="btn btn-primary">Sign in</button>
+        <div class="row mt-5">
+            <div class="text-start col-sm">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Go back</a>
+            </div>
+            <div class="text-end col-sm">
+                <button class="btn btn-primary">Sign in</button>
+            </div>
         </div>
     </div>
 </form>

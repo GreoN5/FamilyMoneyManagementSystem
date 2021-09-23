@@ -20,7 +20,7 @@ namespace FamilyMoneyManagementSystem.ViewModels.MoneyVM
 		[Required(ErrorMessage = "Amount is required!")]
 		public decimal Amount { get; set; }
 
-		[Display(Name = "Time added")]
+		[Display(Name = "Date time addition")]
 		[Required(ErrorMessage = "Time added is required!")]
 		public DateTime TimeAdded { get; set; }
 	}

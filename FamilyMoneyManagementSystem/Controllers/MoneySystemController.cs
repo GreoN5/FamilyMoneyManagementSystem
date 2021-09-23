@@ -167,42 +167,36 @@ namespace FamilyMoneyManagementSystem.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AddRepeatedIncome([FromForm] MoneyVM repeatedIncome)
 		{
-			if (ModelState.IsValid)
+			string username = this._repositoryUser.GetUsername();
+			User user = await this._repositoryUser.GetUser(username);
+			MoneyTax repeatedIncomeTax = await this._repositoryMoney.AddRepeatedIncomeAsync(repeatedIncome);
+
+			if (user != null)
 			{
-				string username = this._repositoryUser.GetUsername();
-				User user = await this._repositoryUser.GetUser(username);
-				MoneyTax repeatedIncomeTax = await this._repositoryMoney.AddRepeatedIncomeAsync(repeatedIncome);
+				await this._repositoryMoney.AddMoneyToUser(user, repeatedIncomeTax);
 
-				if (user != null)
-				{
-					await this._repositoryMoney.AddMoneyToUser(user, repeatedIncomeTax);
-
-					return RedirectToAction("Index", "MoneySystem");
-				}
+				return RedirectToAction("Index", "MoneySystem");
 			}
 
-			return View(repeatedIncome);
+			return RedirectToAction("Login", "Home");
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> AddRepeatedExpense([FromForm] MoneyVM repeatedExpense)
 		{
-			if (ModelState.IsValid)
+			string username = this._repositoryUser.GetUsername();
+			User user = await this._repositoryUser.GetUser(username);
+			MoneyTax repeatedIncomeTax = await this._repositoryMoney.AddRepeatedExpenseAsync(repeatedExpense);
+
+			if (user != null)
 			{
-				string username = this._repositoryUser.GetUsername();
-				User user = await this._repositoryUser.GetUser(username);
-				MoneyTax repeatedIncomeTax = await this._repositoryMoney.AddRepeatedExpenseAsync(repeatedExpense);
+				await this._repositoryMoney.AddMoneyToUser(user, repeatedIncomeTax);
 
-				if (user != null)
-				{
-					await this._repositoryMoney.AddMoneyToUser(user, repeatedIncomeTax);
-
-					return RedirectToAction("Index", "MoneySystem");
-				}
+				return RedirectToAction("Index", "MoneySystem");
 			}
 
-			return View(repeatedExpense);
+			return RedirectToAction("Login", "Home");
 		}
 
 		[HttpPost]
