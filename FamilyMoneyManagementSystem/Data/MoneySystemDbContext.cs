@@ -17,6 +17,7 @@ namespace FamilyMoneyManagementSystem.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			modelBuilder.Entity<User>().Property(u => u.Username).ValueGeneratedNever();
 			modelBuilder.Entity<MoneyTax>().HasOne(p => p.User).WithMany(b => b.Money);
 		}
 	}
